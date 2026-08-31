@@ -6,10 +6,10 @@
     "k22": 14385.0,
     "k18": 11773.0,
     "primary_source": "goodreturns",
-    "cross_check_median_24": 15587.0,
-    "spread_pct": 3.212,
+    "cross_check_median_24": 15516.5,
+    "spread_pct": 4.11,
     "outlier_sources": [],
-    "india_premium": 1.1527,
+    "india_premium": 1.1556,
     "usd_inr": 95.39,
     "stale": false
   },
@@ -37,5 +37,5 @@
     }
   },
   "last_dip_alert_date": "2026-08-31",
-  "updated_at_utc": "2026-08-31T07:10:43.892214+00:00"
+  "updated_at_utc": "2026-08-31T12:49:45.533944+00:00"
 }
