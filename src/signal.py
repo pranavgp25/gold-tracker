@@ -27,7 +27,7 @@ class Features(TypedDict):
     d1_pct: Optional[float]
     d3_pct: Optional[float]
     inr_d1_pct: Optional[float]
-    is_new_30day_low: bool
+    is_new_window_low: bool  # new low within whatever window we have (<=30 days — see window_size)
     window_size: int
 
 
@@ -83,7 +83,7 @@ def compute_features(history: List[Dict[str, Any]]) -> Features:
         inr_d1_pct = round((inr_rates[-1] - inr_rates[-2]) / inr_rates[-2] * 100, 3)
 
     prior_low = min(window30[:-1]) if len(window30) > 1 else None
-    is_new_30day_low = prior_low is not None and price < prior_low
+    is_new_window_low = prior_low is not None and price < prior_low
 
     return {
         "price": price,
@@ -95,7 +95,7 @@ def compute_features(history: List[Dict[str, Any]]) -> Features:
         "d1_pct": d1_pct,
         "d3_pct": d3_pct,
         "inr_d1_pct": inr_d1_pct,
-        "is_new_30day_low": is_new_30day_low,
+        "is_new_window_low": is_new_window_low,
         "window_size": len(window30),
     }
 
@@ -107,40 +107,46 @@ def evaluate(features: Features) -> Signal:
     sma30 = features["sma30"]
     pos30 = features["pos30"]
     d1_pct = features["d1_pct"]
+    # Window is capped at 30 days but is often shorter (e.g. right after a cold
+    # start) — always say what it actually is rather than overclaiming "30-day".
+    w = features["window_size"]
+    wlabel = f"{w}-day"
 
     reasons: List[str] = []
     verdict = "HOLD"
 
     if pos30 is not None and pos30 <= s["strong_buy_pos30_max"] and sma30 is not None and price < sma30:
         verdict = "STRONG BUY"
-        reasons.append(f"price is near the 30-day low (position {pos30:.0%} of the range)")
-        reasons.append(f"and below the 30-day average (₹{sma30:,.0f})")
+        reasons.append(f"price is near the {wlabel} low (position {pos30:.0%} of the range)")
+        reasons.append(f"and below the {wlabel} average (₹{sma30:,.0f})")
     elif d1_pct is not None and d1_pct <= s["buy_d1_pct_max"] and sma7 is not None and price < sma7:
         verdict = "BUY"
         reasons.append(f"price fell {abs(d1_pct):.2f}% today")
         reasons.append(f"and is below the 7-day average (₹{sma7:,.0f}) — a real dip, not a bounce")
     elif sma30 is not None and price < sma30:
         verdict = "ACCUMULATE"
-        reasons.append(f"price (₹{price:,.0f}) is below the 30-day average (₹{sma30:,.0f})")
+        reasons.append(f"price (₹{price:,.0f}) is below the {wlabel} average (₹{sma30:,.0f})")
     elif (pos30 is not None and pos30 >= s["wait_pos30_min"]) or (
         sma30 is not None and price > sma30 * s["wait_sma30_mult"]
     ):
         verdict = "WAIT"
         if pos30 is not None and pos30 >= s["wait_pos30_min"]:
-            reasons.append(f"price is near the 30-day high (position {pos30:.0%} of the range)")
+            reasons.append(f"price is near the {wlabel} high (position {pos30:.0%} of the range)")
         if sma30 is not None and price > sma30 * s["wait_sma30_mult"]:
-            reasons.append(f"price is {(price / sma30 - 1) * 100:.1f}% above the 30-day average")
+            reasons.append(f"price is {(price / sma30 - 1) * 100:.1f}% above the {wlabel} average")
     else:
         reasons.append("price is mid-range — no strong signal either way")
 
-    if features["is_new_30day_low"]:
-        reasons.append("today is a new 30-day low")
+    if features["is_new_window_low"]:
+        reasons.append(f"today is a new {wlabel} low")
     if features["down_streak"] >= 3:
         reasons.append(f"{features['down_streak']} consecutive days of decline")
     if features["inr_d1_pct"] is not None and features["inr_d1_pct"] >= 0.3:
         reasons.append(f"rupee weakened {features['inr_d1_pct']:.2f}% vs USD — may keep local gold elevated")
 
-    confidence = "full" if features["window_size"] >= s["min_history_for_full_confidence"] else "low"
+    confidence = "full" if w >= s["min_history_for_full_confidence"] else "low"
+    if confidence == "low":
+        reasons.append(f"based on {w} day(s) of history so far — still building toward 30")
 
     return {"verdict": verdict, "reasons": reasons, "confidence": confidence, "features": features}
 
@@ -153,7 +159,7 @@ def is_dip_alert(features: Features) -> bool:
         return True
     if d3 is not None and d3 <= s["dip_alert_d3_pct_max"]:
         return True
-    if features["is_new_30day_low"]:
+    if features["is_new_window_low"]:
         return True
     return False
 

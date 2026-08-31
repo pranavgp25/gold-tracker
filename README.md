@@ -51,6 +51,24 @@ ending in Oct 2026); the Twilio sandbox alternative expires every 72 hours, unsu
 for a standing daily alert. `src/notifiers/whatsapp.py` is a stub — implement it and
 register it in `src/config.py` when you're ready to pay for/maintain that channel.
 
+## Refresh rate & history depth
+
+- **Refresh:** the workflow runs twice daily (~09:15 and ~18:15 IST). Delhi's
+  24K/22K bullion-anchored rate itself is typically revised once a day by the
+  source sites — repeated checks the same day return the same 24K/22K figure.
+  18K has been observed to tick independently within the same day even when
+  24K/22K stay flat, so the evening run can still catch a real 18K move or an
+  intraday revision to any karat.
+- **History depth:** no free source publishes a genuine 30-day Delhi archive.
+  goodreturns.in's own "Last 10 Days" table has gaps (skips some calendar
+  days), so on a cold start `seed_history_if_needed()` in `src/tracker.py`
+  patches those gaps with 5paisa.com's denser (but ~1-day-lagged around a
+  revision) 10-day table — good enough for a chart/signal on day one, not
+  claimed to be more precise than that. Every day the workflow runs afterward
+  adds one genuine goodreturns-sourced point, so the series reaches a real,
+  single-source 30 days after about three more weeks of normal operation —
+  no further gap-filling happens once that organic history exists.
+
 ## Known limitations
 
 - Scraped city rates track published city averages, not any specific jeweller's
@@ -59,3 +77,8 @@ register it in `src/config.py` when you're ready to pay for/maintain that channe
 - Source sites can change their HTML; `src/reconcile.py` guards against a single
   broken scraper skewing the headline number, and stale data is carried forward
   (never invented) with a `stale` flag.
+- The 3-day cold-start gap-fill (see above) blends two sources with typically
+  1-2% divergence, which can show as a small kink on the chart around those
+  seam dates. The signal engine's wording always states the real window size
+  in use (e.g. "10-day low"), so it never overclaims 30 days of confidence it
+  doesn't have.

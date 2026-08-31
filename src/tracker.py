@@ -32,6 +32,37 @@ def build_notifiers() -> List[Notifier]:
     return [TelegramNotifier()]
 
 
+def merge_gap_fill(history: List[dict], gap_rows: List[dict], source_label: str) -> List[dict]:
+    """Add `gap_rows` for any date not already present in `history`. Never
+    overwrites an existing date — used to patch holes in goodreturns' sparser
+    backfill table with 5paisa's denser one, without ever treating a
+    secondary source as more authoritative than the primary for a date both
+    cover. See fivepaisa.py's docstring for why that boundary matters."""
+    existing_dates = {r["date"] for r in history}
+    added = [
+        {
+            "date": row["date"],
+            "k24": row["k24"],
+            "k22": row["k22"],
+            "k18": None,
+            "primary_source": source_label,
+            "cross_check_median_24": None,
+            "spread_pct": None,
+            "outlier_sources": [],
+            "india_premium": None,
+            "usd_inr": None,
+            "stale": False,
+            "backfilled": True,
+        }
+        for row in gap_rows
+        if row["date"] not in existing_dates
+    ]
+    if added:
+        print(f"[tracker] gap-filled {len(added)} day(s) from {source_label}: "
+              f"{[r['date'] for r in added]}")
+    return history + added
+
+
 def seed_history_if_needed(dry_run: bool = False) -> None:
     history = store.load_history()
     if len(history) >= 2:
@@ -44,23 +75,11 @@ def seed_history_if_needed(dry_run: bool = False) -> None:
     if not rows:
         print("[tracker] backfill unavailable — starting from today only")
         return
-    seeded = [
-        {
-            "date": row["date"],
-            "k24": row["k24"],
-            "k22": row["k22"],
-            "k18": None,
-            "primary_source": "goodreturns",
-            "cross_check_median_24": None,
-            "spread_pct": None,
-            "outlier_sources": [],
-            "india_premium": None,
-            "usd_inr": None,
-            "stale": False,
-            "backfilled": True,
-        }
-        for row in rows
-    ]
+    seeded = merge_gap_fill([], rows, "goodreturns")
+    # goodreturns' table skips some calendar days; 5paisa's own 10-day table is
+    # denser, so use it only to fill those gaps, never to override a date
+    # goodreturns already answered.
+    seeded = merge_gap_fill(seeded, FivePaisaSource().backfill_10day(), "fivepaisa (gap-fill)")
     store.save_history(seeded)
     print(f"[tracker] seeded {len(seeded)} days of history")
 
@@ -111,8 +130,6 @@ def build_digest_message(record: dict, sig: signal.Signal) -> str:
     lines += ["", f"<b>Signal: {sig['verdict']}</b>"]
     for r in sig["reasons"]:
         lines.append(f"• {r}")
-    if sig["confidence"] == "low":
-        lines.append("(low confidence — still building up price history)")
 
     if price22:
         cost = signal.true_cost_22k_10g(price22)

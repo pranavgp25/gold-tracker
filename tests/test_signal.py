@@ -22,7 +22,7 @@ def test_monotonic_decline_to_30day_low_is_strong_buy():
     feats = signal.compute_features(hist)
     result = signal.evaluate(feats)
     assert result["verdict"] == "STRONG BUY", result
-    assert feats["is_new_30day_low"] is True
+    assert feats["is_new_window_low"] is True
     assert result["confidence"] == "full"
 
 
@@ -41,6 +41,20 @@ def test_short_history_does_not_raise_and_flags_low_confidence():
     result = signal.evaluate(feats)
     assert result["confidence"] == "low"
     assert result["verdict"] in {"STRONG BUY", "BUY", "ACCUMULATE", "WAIT", "HOLD"}
+
+
+def test_short_window_never_claims_30day_in_reasons_text():
+    # Regression test: with only 7 days of real history, a new low must be
+    # described as a "7-day low", never a "30-day low" — a shorter window
+    # cannot honestly claim to have checked 30 days of prices.
+    prices = [110, 108, 106, 104, 102, 101, 100]  # 7 days, monotonic decline
+    hist = _series(prices)
+    feats = signal.compute_features(hist)
+    assert feats["window_size"] == 7
+    result = signal.evaluate(feats)
+    reasons_text = " ".join(result["reasons"])
+    assert "30-day" not in reasons_text
+    assert "7-day" in reasons_text
 
 
 def test_single_day_history_does_not_raise():
@@ -69,7 +83,7 @@ def test_new_30day_low_flag():
     prices = list(range(130, 100, -1))  # 30 strictly decreasing values
     hist = _series(prices)
     feats = signal.compute_features(hist)
-    assert feats["is_new_30day_low"] is True
+    assert feats["is_new_window_low"] is True
 
 
 def test_true_cost_includes_making_charge_and_gst():
