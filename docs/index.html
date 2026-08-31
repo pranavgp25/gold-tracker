@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delhi Gold Price Tracker</title>
+  <meta name="description" content="Daily 24K/22K/18K gold rates in Delhi with a buy/wait signal, so you can time a jewellery purchase." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="wiom-container page-header__inner">
+      <div>
+        <h1><span class="material-icons" aria-hidden="true">paid</span> Delhi Gold Tracker</h1>
+        <p>24K / 22K / 18K rates &middot; updated twice daily</p>
+      </div>
+      <div id="last-updated">Loading&hellip;</div>
+    </div>
+  </header>
+
+  <main class="wiom-container">
+
+    <div id="stale-banner" class="stale-banner" role="status">
+      <span class="material-icons" aria-hidden="true" style="vertical-align:middle;font-size:20px;color:var(--wiom-icon-non-action)">info</span>
+      Could not refresh today's rate on the last run &mdash; showing the last known price.
+    </div>
+
+    <div id="app-content" hidden>
+
+      <section id="verdict-banner" class="verdict-banner verdict-hold" aria-live="polite">
+        <span class="material-icons" aria-hidden="true">trending_flat</span>
+        <div class="verdict-banner__text">
+          <h2 id="verdict-label">HOLD</h2>
+          <ul id="verdict-reasons"></ul>
+        </div>
+      </section>
+
+      <section class="karat-grid">
+        <div class="karat-card">
+          <span class="karat-card__label">24K &middot; per gram</span>
+          <span class="karat-card__price" id="price-24k">&#8377;&mdash;</span>
+          <span class="karat-card__change flat" id="change-24k"></span>
+        </div>
+        <div class="karat-card">
+          <span class="karat-card__label">22K &middot; per gram</span>
+          <span class="karat-card__price" id="price-22k">&#8377;&mdash;</span>
+          <span class="karat-card__change flat" id="change-22k"></span>
+        </div>
+        <div class="karat-card">
+          <span class="karat-card__label">18K &middot; per gram</span>
+          <span class="karat-card__price" id="price-18k">&#8377;&mdash;</span>
+          <span class="karat-card__change flat" id="change-18k"></span>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <h3><span class="material-icons" aria-hidden="true">show_chart</span> 24K price &mdash; last 90 days</h3>
+          <div class="chart-wrap">
+            <canvas id="price-chart" role="img" aria-label="Line chart of the 24K Delhi gold rate over recent days"></canvas>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3><span class="material-icons" aria-hidden="true">calculate</span> Jewellery cost estimator</h3>
+          <div class="estimator-row">
+            <label for="grams-input">Weight (grams, 22K)</label>
+            <input type="number" id="grams-input" value="10" min="1" step="0.5" inputmode="decimal" aria-describedby="estimator-hint">
+          </div>
+          <div class="estimator-row">
+            <label for="making-charge-input">Making charge (%)</label>
+            <input type="number" id="making-charge-input" value="10" min="0" step="1" inputmode="decimal">
+          </div>
+          <div class="estimator-result">
+            <div class="estimator-result__label">Estimated cost (metal + making + 3% GST)</div>
+            <div class="estimator-result__value" id="estimator-value">&#8377;&mdash;</div>
+          </div>
+          <p id="estimator-hint" style="font:var(--wiom-type-body-sm);color:var(--wiom-text-subtle);margin-top:var(--wiom-space-8)">
+            Indicative only &mdash; jewellers add their own premium on top of making charges.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3><span class="material-icons" aria-hidden="true">info</span> Source details</h3>
+        <div class="meta-panel">
+          <span>Primary source: <strong id="meta-source">&mdash;</strong></span>
+          <span>Cross-check spread: <strong id="meta-spread">&mdash;</strong></span>
+          <span>India premium over global spot: <strong id="meta-premium">&mdash;</strong></span>
+          <span>USD/INR: <strong id="meta-fx">&mdash;</strong></span>
+        </div>
+      </section>
+
+    </div>
+
+    <div id="empty-state" class="empty-state">
+      <span class="material-icons" aria-hidden="true">hourglass_empty</span>
+      <h2>No data yet</h2>
+      <p>The first scheduled run hasn't landed. Trigger the "Track Gold Prices" workflow manually from the Actions tab, or check back after the next scheduled run.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Rates are city averages scraped from public sources; they exclude jeweller-specific making charges and premiums. Not financial advice.</p>
+    <p><a href="https://github.com/" id="repo-link">View source on GitHub</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

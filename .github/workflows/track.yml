@@ -1,0 +1,79 @@
+name: Track Gold Prices
+
+on:
+  schedule:
+    # 09:15 IST — full daily digest + dip check
+    - cron: "45 3 * * *"
+    # 18:15 IST — dip check only, silent otherwise
+    - cron: "45 12 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (print messages, write/send nothing)"
+        type: boolean
+        default: false
+      digest:
+        description: "Send the full daily digest, not just a dip check"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gold-tracker-run
+  cancel-in-progress: false
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine run flags
+        id: flags
+        shell: bash
+        run: |
+          # Scheduled 09:15 IST run (cron "45 3 * * *") sends the full digest;
+          # the 18:15 IST run and any other trigger default to dip-check-only
+          # unless workflow_dispatch explicitly asks for the digest.
+          if [ "${{ github.event.schedule }}" = "45 3 * * *" ]; then
+            echo "digest=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "digest=${{ inputs.digest }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "digest=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "dry_run=${{ inputs.dry_run || 'false' }}" >> "$GITHUB_OUTPUT"
+
+      - name: Run tracker
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ARGS=""
+          if [ "${{ steps.flags.outputs.digest }}" = "true" ]; then ARGS="$ARGS --digest"; fi
+          if [ "${{ steps.flags.outputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python -m src.tracker $ARGS
+
+      - name: Commit updated data
+        if: steps.flags.outputs.dry_run != 'true'
+        run: |
+          git config user.name "gold-tracker-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data/history.json docs/data/latest.json
+          if git diff --cached --quiet; then
+            echo "No data changes to commit"
+          else
+            git commit -m "Update gold price data ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git push
+          fi
