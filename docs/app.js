@@ -41,6 +41,11 @@
 
   function renderChart(history) {
     const points = history.slice(-90).filter((r) => r.k24 !== null && r.k24 !== undefined);
+
+    const titleEl = document.getElementById("chart-title");
+    const n = points.length;
+    titleEl.textContent = `24K price — last ${n} day${n === 1 ? "" : "s"}`;
+
     const ctx = document.getElementById("price-chart").getContext("2d");
     new Chart(ctx, {
       type: "line",
