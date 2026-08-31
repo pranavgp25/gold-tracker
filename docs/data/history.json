@@ -1,3 +1,101 @@
 {
-  "records": []
+  "records": [
+    {
+      "date": "2026-08-23",
+      "k24": 16324.0,
+      "k22": 14965.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-25",
+      "k24": 16390.0,
+      "k22": 15025.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-26",
+      "k24": 16390.0,
+      "k22": 15025.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-27",
+      "k24": 16079.0,
+      "k22": 14740.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-29",
+      "k24": 15839.0,
+      "k22": 14520.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-30",
+      "k24": 15839.0,
+      "k22": 14520.0,
+      "k18": null,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": null,
+      "spread_pct": null,
+      "outlier_sources": [],
+      "india_premium": null,
+      "usd_inr": null,
+      "stale": false,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-31",
+      "k24": 15692.0,
+      "k22": 14385.0,
+      "k18": 11800.0,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": 15587.0,
+      "spread_pct": 3.212,
+      "outlier_sources": [],
+      "india_premium": 1.1525,
+      "usd_inr": 95.39,
+      "stale": false
+    }
+  ]
 }
