@@ -4,7 +4,7 @@ Tracks 24K / 22K / 18K gold rates in Delhi, computes a daily buy/wait signal fro
 action, and pushes alerts to Telegram. Runs entirely on free GitHub infrastructure —
 GitHub Actions for the twice-daily fetch, GitHub Pages for the dashboard.
 
-**Dashboard:** `https://<your-github-username>.github.io/gold-tracker/` (enable after first push)
+**Dashboard:** https://pranavgp25.github.io/gold-tracker/
 
 ## How it works
 
