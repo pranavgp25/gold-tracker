@@ -401,14 +401,14 @@
     },
     {
       "date": "2026-09-21",
-      "k24": 15598.0,
-      "k22": 14299.0,
-      "k18": 11702.0,
+      "k24": 15473.0,
+      "k22": 14185.0,
+      "k18": 11609.0,
       "primary_source": "goodreturns",
       "cross_check_median_24": 15351.0,
-      "spread_pct": 3.167,
+      "spread_pct": 3.193,
       "outlier_sources": [],
-      "india_premium": 1.1605,
+      "india_premium": 1.1533,
       "usd_inr": 95.88,
       "stale": false
     }
