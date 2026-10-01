@@ -535,11 +535,11 @@
       "k22": 13695.0,
       "k18": 11208.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 14697.0,
-      "spread_pct": 2.941,
+      "cross_check_median_24": 14681.0,
+      "spread_pct": 3.156,
       "outlier_sources": [],
-      "india_premium": 1.1589,
-      "usd_inr": 95.83,
+      "india_premium": 1.1551,
+      "usd_inr": 96.33,
       "stale": false
     }
   ]
