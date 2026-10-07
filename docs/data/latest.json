@@ -1,38 +1,39 @@
 {
-  "date": "2026-10-06",
+  "date": "2026-10-07",
   "record": {
-    "date": "2026-10-06",
-    "k24": 15037.0,
-    "k22": 13785.0,
-    "k18": 11282.0,
+    "date": "2026-10-07",
+    "k24": 14970.0,
+    "k22": 13725.0,
+    "k18": 11233.0,
     "primary_source": "goodreturns",
-    "cross_check_median_24": 14690.0,
-    "spread_pct": 3.945,
+    "cross_check_median_24": 14743.0,
+    "spread_pct": 3.941,
     "outlier_sources": [],
-    "india_premium": 1.1641,
+    "india_premium": 1.1706,
     "usd_inr": 96.42,
     "stale": false
   },
   "signal": {
-    "verdict": "ACCUMULATE",
+    "verdict": "STRONG BUY",
     "reasons": [
-      "price (₹15,037) is below the 30-day average (₹15,283)"
+      "price is near the 30-day low (position 11% of the range)",
+      "and below the 30-day average (₹15,268)"
     ],
     "confidence": "full",
     "features": {
-      "price": 15037.0,
-      "sma7": 14959.14,
-      "sma30": 15283.13,
-      "pos30": 0.2028,
-      "drawdown_pct": 3.603,
-      "down_streak": 0,
-      "d1_pct": 0.696,
-      "d3_pct": 0.696,
-      "inr_d1_pct": 0.125,
+      "price": 14970.0,
+      "sma7": 14970.0,
+      "sma30": 15267.8,
+      "pos30": 0.1078,
+      "drawdown_pct": 4.032,
+      "down_streak": 1,
+      "d1_pct": -0.446,
+      "d3_pct": 0.248,
+      "inr_d1_pct": 0.0,
       "is_new_window_low": false,
       "window_size": 30
     }
   },
   "last_dip_alert_date": "2026-09-30",
-  "updated_at_utc": "2026-10-06T18:37:09.294897+00:00"
+  "updated_at_utc": "2026-10-07T10:33:51.872405+00:00"
 }
