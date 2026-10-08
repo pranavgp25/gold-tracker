@@ -1,15 +1,15 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "record": {
-    "date": "2026-10-07",
+    "date": "2026-10-08",
     "k24": 14970.0,
     "k22": 13725.0,
     "k18": 11233.0,
     "primary_source": "goodreturns",
-    "cross_check_median_24": 14743.0,
-    "spread_pct": 3.941,
+    "cross_check_median_24": 14708.5,
+    "spread_pct": 3.487,
     "outlier_sources": [],
-    "india_premium": 1.1712,
+    "india_premium": 1.1697,
     "usd_inr": 96.73,
     "stale": false
   },
@@ -17,24 +17,23 @@
     "verdict": "STRONG BUY",
     "reasons": [
       "price is near the 30-day low (position 11% of the range)",
-      "and below the 30-day average (₹15,268)",
-      "rupee weakened 0.32% vs USD — may keep local gold elevated"
+      "and below the 30-day average (₹15,248)"
     ],
     "confidence": "full",
     "features": {
       "price": 14970.0,
-      "sma7": 14970.0,
-      "sma30": 15267.8,
+      "sma7": 14974.43,
+      "sma30": 15248.47,
       "pos30": 0.1078,
       "drawdown_pct": 4.032,
-      "down_streak": 1,
-      "d1_pct": -0.446,
+      "down_streak": 0,
+      "d1_pct": 0.0,
       "d3_pct": 0.248,
-      "inr_d1_pct": 0.322,
+      "inr_d1_pct": 0.0,
       "is_new_window_low": false,
       "window_size": 30
     }
   },
   "last_dip_alert_date": "2026-09-30",
-  "updated_at_utc": "2026-10-07T19:04:44.096192+00:00"
+  "updated_at_utc": "2026-10-08T10:54:59.558377+00:00"
 }
