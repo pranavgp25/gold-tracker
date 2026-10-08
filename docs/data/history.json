@@ -626,11 +626,11 @@
       "k22": 13725.0,
       "k18": 11233.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 14708.5,
-      "spread_pct": 3.487,
+      "cross_check_median_24": 14970.0,
+      "spread_pct": 0.0,
       "outlier_sources": [],
-      "india_premium": 1.1697,
-      "usd_inr": 96.73,
+      "india_premium": 1.1659,
+      "usd_inr": 96.78,
       "stale": false
     }
   ]
