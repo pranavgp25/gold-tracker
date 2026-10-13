@@ -691,11 +691,11 @@
       "k22": 13700.0,
       "k18": 11212.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 14830.0,
-      "spread_pct": 2.021,
+      "cross_check_median_24": 14709.0,
+      "spread_pct": 3.145,
       "outlier_sources": [],
-      "india_premium": 1.1669,
-      "usd_inr": 95.78,
+      "india_premium": 1.1737,
+      "usd_inr": 95.28,
       "stale": false
     }
   ]
