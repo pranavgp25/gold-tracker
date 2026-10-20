@@ -778,14 +778,14 @@
     },
     {
       "date": "2026-10-20",
-      "k24": 14732.0,
-      "k22": 13505.0,
-      "k18": 11052.0,
+      "k24": 14623.0,
+      "k22": 13405.0,
+      "k18": 10971.0,
       "primary_source": "goodreturns",
       "cross_check_median_24": 14568.5,
-      "spread_pct": 3.414,
+      "spread_pct": 3.44,
       "outlier_sources": [],
-      "india_premium": 1.1715,
+      "india_premium": 1.1648,
       "usd_inr": 94.93,
       "stale": false
     }
