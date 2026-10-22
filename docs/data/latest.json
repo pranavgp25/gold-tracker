@@ -9,8 +9,8 @@
     "cross_check_median_24": 14446.0,
     "spread_pct": 2.435,
     "outlier_sources": [],
-    "india_premium": 1.1594,
-    "usd_inr": 94.47,
+    "india_premium": 1.173,
+    "usd_inr": 94.82,
     "stale": false
   },
   "signal": {
@@ -18,7 +18,8 @@
     "reasons": [
       "price is near the 30-day low (position 0% of the range)",
       "and below the 30-day average (₹14,964)",
-      "today is a new 30-day low"
+      "today is a new 30-day low",
+      "rupee weakened 0.37% vs USD — may keep local gold elevated"
     ],
     "confidence": "full",
     "features": {
@@ -30,11 +31,11 @@
       "down_streak": 1,
       "d1_pct": -1.163,
       "d3_pct": -2.47,
-      "inr_d1_pct": 0.0,
+      "inr_d1_pct": 0.37,
       "is_new_window_low": true,
       "window_size": 30
     }
   },
   "last_dip_alert_date": "2026-10-22",
-  "updated_at_utc": "2026-10-22T08:54:35.249661+00:00"
+  "updated_at_utc": "2026-10-22T17:38:20.246004+00:00"
 }
