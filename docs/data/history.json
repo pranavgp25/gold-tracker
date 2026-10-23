@@ -821,11 +821,11 @@
       "k22": 13075.0,
       "k18": 10686.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 14227.0,
-      "spread_pct": 3.155,
+      "cross_check_median_24": 14135.0,
+      "spread_pct": 4.445,
       "outlier_sources": [],
-      "india_premium": 1.163,
-      "usd_inr": 94.82,
+      "india_premium": 1.1692,
+      "usd_inr": 94.94,
       "stale": false
     }
   ]

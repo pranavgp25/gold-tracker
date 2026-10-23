@@ -6,11 +6,11 @@
     "k22": 13075.0,
     "k18": 10686.0,
     "primary_source": "goodreturns",
-    "cross_check_median_24": 14227.0,
-    "spread_pct": 3.155,
+    "cross_check_median_24": 14135.0,
+    "spread_pct": 4.445,
     "outlier_sources": [],
-    "india_premium": 1.163,
-    "usd_inr": 94.82,
+    "india_premium": 1.1692,
+    "usd_inr": 94.94,
     "stale": false
   },
   "signal": {
@@ -30,11 +30,11 @@
       "down_streak": 2,
       "d1_pct": -1.315,
       "d3_pct": -2.462,
-      "inr_d1_pct": 0.0,
+      "inr_d1_pct": 0.127,
       "is_new_window_low": true,
       "window_size": 30
     }
   },
   "last_dip_alert_date": "2026-10-23",
-  "updated_at_utc": "2026-10-23T08:49:38.253695+00:00"
+  "updated_at_utc": "2026-10-23T17:27:15.552500+00:00"
 }
