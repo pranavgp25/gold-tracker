@@ -9,7 +9,7 @@
     "cross_check_median_24": 14042.5,
     "spread_pct": 2.855,
     "outlier_sources": [],
-    "india_premium": 1.1752,
+    "india_premium": 1.1759,
     "usd_inr": 94.95,
     "stale": false
   },
@@ -35,5 +35,5 @@
     }
   },
   "last_dip_alert_date": "2026-11-01",
-  "updated_at_utc": "2026-11-01T10:47:35.195988+00:00"
+  "updated_at_utc": "2026-11-01T18:07:05.436743+00:00"
 }
