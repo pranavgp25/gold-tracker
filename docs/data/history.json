@@ -964,11 +964,11 @@
       "k22": 12815.0,
       "k18": 10488.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 13898.5,
-      "spread_pct": 0.968,
+      "cross_check_median_24": 13911.5,
+      "spread_pct": 0.966,
       "outlier_sources": [],
-      "india_premium": 1.1764,
-      "usd_inr": 94.91,
+      "india_premium": 1.1692,
+      "usd_inr": 94.75,
       "stale": false
     }
   ]
