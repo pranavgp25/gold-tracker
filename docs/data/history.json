@@ -1126,6 +1126,19 @@
       "india_premium": 1.1711,
       "usd_inr": 94.25,
       "stale": false
+    },
+    {
+      "date": "2026-11-16",
+      "k24": 13695.0,
+      "k22": 12555.0,
+      "k18": 10275.0,
+      "primary_source": "goodreturns",
+      "cross_check_median_24": 13776.0,
+      "spread_pct": 0.59,
+      "outlier_sources": [],
+      "india_premium": 1.1712,
+      "usd_inr": 94.25,
+      "stale": false
     }
   ]
 }
