@@ -1237,10 +1237,10 @@
       "k22": 11730.0,
       "k18": 9600.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 12801.5,
-      "spread_pct": 2.025,
+      "cross_check_median_24": 12860.5,
+      "spread_pct": 1.102,
       "outlier_sources": [],
-      "india_premium": 1.184,
+      "india_premium": 1.2043,
       "usd_inr": 92.92,
       "stale": false
     }
