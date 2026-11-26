@@ -1263,11 +1263,11 @@
       "k22": 11455.0,
       "k18": 9375.0,
       "primary_source": "goodreturns",
-      "cross_check_median_24": 12342.0,
-      "spread_pct": 1.232,
+      "cross_check_median_24": 12495.0,
+      "spread_pct": 0.0,
       "outlier_sources": [],
-      "india_premium": 1.1778,
-      "usd_inr": 92.24,
+      "india_premium": 1.1776,
+      "usd_inr": 92.45,
       "stale": false
     }
   ]
