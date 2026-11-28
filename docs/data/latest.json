@@ -1,39 +1,38 @@
 {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "record": {
-    "date": "2026-11-27",
-    "k24": 12855.0,
-    "k22": 11785.0,
-    "k18": 9645.0,
+    "date": "2026-11-28",
+    "k24": 12801.0,
+    "k22": 11735.0,
+    "k18": 9604.0,
     "primary_source": "goodreturns",
-    "cross_check_median_24": 12855.0,
-    "spread_pct": 0.0,
+    "cross_check_median_24": 12856.0,
+    "spread_pct": 0.429,
     "outlier_sources": [],
-    "india_premium": 1.1765,
+    "india_premium": 1.1722,
     "usd_inr": 93.0,
     "stale": false
   },
   "signal": {
     "verdict": "ACCUMULATE",
     "reasons": [
-      "price (₹12,855) is below the 30-day average (₹13,639)",
-      "rupee weakened 0.59% vs USD — may keep local gold elevated"
+      "price (₹12,801) is below the 30-day average (₹13,585)"
     ],
     "confidence": "full",
     "features": {
-      "price": 12855.0,
-      "sma7": 12600.0,
-      "sma30": 13638.8,
-      "pos30": 0.2252,
-      "drawdown_pct": 12.054,
-      "down_streak": 0,
-      "d1_pct": 2.881,
-      "d3_pct": 0.508,
-      "inr_d1_pct": 0.595,
+      "price": 12801.0,
+      "sma7": 12639.71,
+      "sma30": 13585.17,
+      "pos30": 0.2014,
+      "drawdown_pct": 12.424,
+      "down_streak": 1,
+      "d1_pct": -0.42,
+      "d3_pct": 3.711,
+      "inr_d1_pct": 0.0,
       "is_new_window_low": false,
       "window_size": 30
     }
   },
   "last_dip_alert_date": "2026-11-25",
-  "updated_at_utc": "2026-11-27T21:38:42.584094+00:00"
+  "updated_at_utc": "2026-11-28T12:19:38.687971+00:00"
 }
